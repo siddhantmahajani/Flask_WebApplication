@@ -16,11 +16,15 @@ def login():
     error = None
     if request.method == "POST":
         if request.form['username'] == "abc" and request.form['password'] != "123":
-            flash("Invalid password")
-            return redirect(url_for("failure"))
+            #flash("Invalid password")
+            #return redirect(url_for("failure"))
+            success = "Login successful! Welcome {}".format(request.form['username']) + ". I am Flask."
+            return jsonify({"response" : success})
         else:
-            flash("Login successful")
-            return redirect(url_for("success", name = request.form['username']))
+            #flash("Login successful")
+            #return redirect(url_for("success", name = request.form['username']))
+            error = "Invalid username or password! Please enter the correct username or password."
+            return jsonify({"response" : error})
 
 if __name__ == "__main__":
     app.run(debug=True)
